@@ -14,10 +14,20 @@ for name, interface in ifcfg.interfaces().items():
         print(f"----------------------------------------------------")
         print(subprocess.call((shlex.split(f"ip addr show {name}"))))
         print(f"----------------------------------------------------")
+
+        new_count = random.randint(1, config["max_ips"])
+        print(f"adding {new_count} new ip adresses")
         random_ips = sorted(random.sample(
             population=range(config["ip_range"]["min"], config["ip_range"]["max"] + 1),
-            k=random.randint(1, config["max_ips"])))
+            k=new_count))
         for random_ip in random_ips:
             new_address = f"{config['ip_range']['network']}.{random_ip}"
-            print(new_address)
-        # subprocess.call( shlex.split(f"ip addr add 192.168.4.244/23 dev {name} valid_lft {config['valid_lft']} preferred_lft 0"))
+            subprocess.call(
+                shlex.split(f"ip addr add {new_address} dev "
+                            f"{name} valid_lft {config['valid_lft']} "
+                            f"preferred_lft 0"))
+            
+        print(f"----------------------------------------------------")
+        print(f"config for {name} after:")
+        print(subprocess.call((shlex.split(f"ip addr show {name}"))))
+        print(f"----------------------------------------------------")
