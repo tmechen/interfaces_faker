@@ -3,15 +3,12 @@ import shlex
 import socket
 import subprocess
 
-import ifcfg
 import yaml
-
-print(socket.if_nameindex())
 
 with open(r'config.yaml') as file:
     config = yaml.load(file, Loader=yaml.FullLoader)
 
-for name, interface in ifcfg.interfaces().items():
+for index, name in socket.if_nameindex():
     if name == config["interface"]:
         print(f"config for {name} before:")
         print(f"----------------------------------------------------")
