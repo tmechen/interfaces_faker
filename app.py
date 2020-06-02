@@ -1,9 +1,12 @@
 import random
 import shlex
+import socket
 import subprocess
 
 import ifcfg
 import yaml
+
+socket.if_nameindex()
 
 with open(r'config.yaml') as file:
     config = yaml.load(file, Loader=yaml.FullLoader)
@@ -18,15 +21,19 @@ for name, interface in ifcfg.interfaces().items():
         new_count = random.randint(1, config["max_ips"])
         print(f"adding {new_count} new ip adresses")
         random_ips = sorted(random.sample(
-            population=range(config["ip_range"]["min"], config["ip_range"]["max"] + 1),
+            population=range(config["ip_range"]["min"],
+                             config["ip_range"]["max"] + 1),
             k=new_count))
         for random_ip in random_ips:
-            new_address = f"{config['ip_range']['network']}.{random_ip}"
+            new_address = f"{config['ip_range']['network']}." \
+                          f"{config['ip_range']['subnet']}." \
+                          f"{random_ip}/" \
+                          f"{config['ip_range']['CIDR']}"
             subprocess.call(
-                shlex.split(f"ip addr add {new_address} dev "
+                shlex.split(f"ip addr add {new_address}/24 dev "
                             f"{name} valid_lft {config['valid_lft']} "
                             f"preferred_lft 0"))
-            
+
         print(f"----------------------------------------------------")
         print(f"config for {name} after:")
         print(subprocess.call((shlex.split(f"ip addr show {name}"))))
