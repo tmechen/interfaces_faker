@@ -1,9 +1,44 @@
-interface: ens33 #interface name
-valid_lft: 12 # valid for seconds
+interface: eth0 #interface name
+valid_lft: 7200 # valid for seconds
 max_ips: 10 # max new temporary ips to assign (will be random 1-max_ips)
 ip_range: # pool of ips to assign
   network: 192.168 # network part for ip address
   subnet: 160
-  min: 10 # min ip in pool
-  max: 45 # max ip in pool
+  hosts:
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+    - 28
+    - 29
+    - 30
+    - 31
+    - 32
+    - 33
+    - 34
+    - 35
+    - 36
+    - 37
+    - 38
+    - 39
+    - 40
+    - 41
+    - 42
+    - 43
+    - 44
+    - 45
   CIDR: 24 # subnet mask

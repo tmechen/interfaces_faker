@@ -16,10 +16,9 @@ for index, name in socket.if_nameindex():
         print(f"----------------------------------------------------")
 
         new_count = random.randint(1, config["max_ips"])
-        print(f"adding {new_count} new ip adresses")
+        print(f"adding {new_count} new ip adresses for {config['valid_lft']} seconds")
         random_ips = sorted(random.sample(
-            population=range(config["ip_range"]["min"],
-                             config["ip_range"]["max"] + 1),
+            population=config['ip_range']['hosts'],
             k=new_count))
         for random_ip in random_ips:
             new_address = f"{config['ip_range']['network']}." \
