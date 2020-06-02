@@ -14,7 +14,7 @@ for name, interface in ifcfg.interfaces().items():
         print(f"----------------------------------------------------")
         print(subprocess.call((shlex.split(f"ip addr show {name}"))))
         print(f"----------------------------------------------------")
-        random_ips = sorted(random.choices(
+        random_ips = sorted(random.sample(
             population=range(config["ip_range"]["min"], config["ip_range"]["max"] + 1),
             k=random.randint(1, config["max_ips"])))
         for random_ip in random_ips:
