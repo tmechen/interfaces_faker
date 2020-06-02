@@ -1,5 +1,5 @@
-interface: eth0 #interface name
-valid_lft: 7200 # valid for seconds
+interface: ens33 #interface name
+valid_lft: 12 # valid for seconds
 max_ips: 10 # max new temporary ips to assign (will be random 1-max_ips)
 ip_range: # pool of ips to assign
   network: 192.168 # network part for ip address
