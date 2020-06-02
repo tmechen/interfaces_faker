@@ -1,3 +1,4 @@
+import shlex
 import subprocess
 
 import ifcfg
@@ -9,4 +10,4 @@ with open(r'config.yaml') as file:
 for name, interface in ifcfg.interfaces().items():
     print(name)
     if name == config["interface"]:
-        print(subprocess.call([f"ip addr show {name}"]))
+        print(subprocess.call((shlex.split(f"ip addr show {name}"))))
