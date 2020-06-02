@@ -6,7 +6,7 @@ import subprocess
 import ifcfg
 import yaml
 
-socket.if_nameindex()
+print(socket.if_nameindex())
 
 with open(r'config.yaml') as file:
     config = yaml.load(file, Loader=yaml.FullLoader)
@@ -30,7 +30,7 @@ for name, interface in ifcfg.interfaces().items():
                           f"{random_ip}/" \
                           f"{config['ip_range']['CIDR']}"
             subprocess.call(
-                shlex.split(f"ip addr add {new_address}/24 dev "
+                shlex.split(f"ip addr add {new_address} dev "
                             f"{name} valid_lft {config['valid_lft']} "
                             f"preferred_lft 0"))
 
