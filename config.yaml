@@ -1,6 +1,7 @@
 interface: ens33 #interface name
 valid_lft: 72 # valid for seconds
 max_ips: 10 # max new temporary ips to assign (will be random 1-max_ips)
-ip range: # pool of ips to assign
-  min: 192.36.216.10 # min ip in pool
-  max: 192.36.216.45 # max ip in pool
+ip_range: # pool of ips to assign
+  network: 192.36.216 # network part for ip address
+  min: 10 # min ip in pool
+  max: 45 # max ip in pool
